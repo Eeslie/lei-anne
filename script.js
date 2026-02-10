@@ -8,6 +8,11 @@ const title = document.getElementById("letter-title");
 const catImg = document.getElementById("letter-cat");
 const buttons = document.getElementById("letter-buttons");
 const finalText = document.getElementById("final-text");
+const jigglypuffPopup = document.getElementById("jigglypuff-popup");
+const jigglypuffGif = document.getElementById("jigglypuff-gif");
+
+// Track if popup has been shown
+let popupShown = false;
 
 // Click Envelope
 
@@ -20,20 +25,26 @@ envelope.addEventListener("click", () => {
     },50);
 });
 
-// Logic to move the NO btn
-
-noBtn.addEventListener("mouseover", () => {
-    const min = 200;
-    const max = 200;
-
-    const distance = Math.random() * (max - min) + min;
-    const angle = Math.random() * Math.PI * 2;
-
-    const moveX = Math.cos(angle) * distance;
-    const moveY = Math.sin(angle) * distance;
-
-    noBtn.style.transition = "transform 0.3s ease";
-    noBtn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+// Logic when NO btn is clicked
+noBtn.addEventListener("click", () => {
+    // Hide the NO button
+    noBtn.style.display = "none";
+    
+    // Show the jigglypuff popup only once
+    if (!popupShown) {
+        // Reload the GIF to restart animation
+        const gifSrc = jigglypuffGif.src;
+        jigglypuffGif.src = '';
+        jigglypuffGif.src = gifSrc + '?t=' + new Date().getTime();
+        
+        jigglypuffPopup.style.display = "flex";
+        popupShown = true;
+        
+        // Hide popup after GIF plays once (estimate 3 seconds for typical GIF loop)
+        setTimeout(() => {
+            jigglypuffPopup.style.display = "none";
+        }, 3000);
+    }
 });
 
 // Logic to make YES btn to grow
@@ -62,7 +73,7 @@ noBtn.addEventListener("mouseover", () => {
 yesBtn.addEventListener("click", () => {
     title.textContent = "Yippeeee!";
 
-    catImg.src = "/cat_dance.gif";
+    catImg.src = "./cat_dance.gif";
 
     document.querySelector(".letter-window").classList.add("final");
 

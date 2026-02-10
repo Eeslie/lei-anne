@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("/heart-bg.jpg");
+    background-image: url("./gif-harts.gif");
     font-family: "Pixelify Sans", sans-serif;
 }
 
@@ -50,7 +50,7 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url("/window.png");
+    background-image: url("./window.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -136,4 +136,45 @@ display: inline-block;
     padding: 10px 20px;
     background-color: rgba(255,240,240,0.5);
     border-radius: 12px;
+}
+
+/* Jigglypuff Popup */
+#jigglypuff-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    pointer-events: none;
+    animation: popupFadeIn 0.5s ease;
+}
+
+#jigglypuff-gif {
+    max-width: 80%;
+    max-height: 80%;
+    width: auto;
+    height: auto;
+    animation: popupScale 0.5s ease;
+}
+
+@keyframes popupFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popupScale {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
 }
